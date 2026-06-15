@@ -243,6 +243,3 @@ RULES = {
     ('tinggi','tinggi','tinggi','tinggi','sedang'): 'baik',
     ('tinggi','tinggi','tinggi','tinggi','tinggi'): 'baik',
 }
-
-def get_keputusan(r, u, l, n, g):
-    return RULES[(r, u, l, n, g)]

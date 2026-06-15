@@ -359,10 +359,6 @@ elif menu == "Hitung SPK":
                     ('gross_margin',    'tinggi'): mu(u, [param_gross, 100, 100],             row['Gross Margin']),
                 }
 
-                # himpunan = ['rendah', 'sedang', 'tinggi']
-                # def skor_k(k):
-                #     return 2 if k == 'tinggi' else (1 if k == 'sedang' else 0)
-
                 for kondisi, konsekuen in RULES.items():
                     r, utg_h, l, n, g = kondisi
                     alpha = min(
