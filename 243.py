@@ -6,7 +6,6 @@ from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 from pathlib import Path
 import itertools
-from fuzzy_rules import get_keputusan
 from fuzzy_rules import RULES
 
 st.set_page_config(
@@ -319,7 +318,8 @@ elif menu == "Hitung SPK":
                 ret_v = row['Return']
                 utg_v = row['Kesehatan Utang']
                 net_v = row['Net Margin']
-
+                lik_v  = row['Likuiditas']
+                grs_v  = row['Gross Margin']
                 def mu(universe, mf_params, nilai):
                     return round(float(fuzz.interp_membership(universe, fuzz.trimf(universe, mf_params), nilai)), 3)
 
@@ -338,6 +338,14 @@ elif menu == "Hitung SPK":
                     "μ Net Rendah"        : mu(u, [0, 0, param_net],                 net_v),
                     "μ Net Sedang"        : mu(u, [b_net, param_net, a_net],          net_v),
                     "μ Net Tinggi"        : mu(u, [param_net, 100, 100],              net_v),
+                    "Likuiditas (nilai)"   : round(lik_v, 2),
+                    "μ Lik Rendah"         : mu(u, [0, 0, param_likuiditas],            lik_v),
+                    "μ Lik Sedang"         : mu(u, [b_lik, param_likuiditas, a_lik],    lik_v),
+                    "μ Lik Tinggi"         : mu(u, [param_likuiditas, 100, 100],        lik_v),
+                    "Gross Margin (nilai)" : round(grs_v, 2),
+                    "μ GM Rendah"          : mu(u, [0, 0, param_gross],                 grs_v),
+                    "μ GM Sedang"          : mu(u, [b_grs, param_gross, a_grs],         grs_v),
+                    "μ GM Tinggi"          : mu(u, [param_gross, 100, 100],             grs_v),
                     "Skor Output"         : round(skor, 2),
                 })
                 # tampilkan hanya rule yang AKTIF (α > 0) per saham.
